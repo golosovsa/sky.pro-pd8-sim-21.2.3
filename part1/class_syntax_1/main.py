@@ -23,10 +23,21 @@
 # Формат вывода мы оставим прежний:
 # Cумма: 410
 
+
+from functools import reduce
+
 class Item:
-    def __init__(self, title, price):
+    def __init__(self, title, price, unit, quantity):
         self.title = title
         self.price = price
+        self.unit = unit
+        self.quantity = quantity
+
+    def total_price(self):
+        return self.price * self.quantity
+
+    def __str__(self):
+        return f"{self.title}, {self.quantity}{self.unit} - {self.total_price()}"
 
 
 class Cheque:
@@ -34,11 +45,14 @@ class Cheque:
         self.items = []
 
     def purchases(self):
-        return "\n".join([f"{item.title} - {item.price}" for item in self.items])
+        return "\n".join([str(item) for item in self.items])
     
     def get_sum(self):
-        cheque_sum = sum([item.price for item in self.items])
+        cheque_sum = reduce(lambda total, item: total + item.total_price(), self.items, 0)
         return f"Сумма: {cheque_sum}"
+
+    def add_item(self, **kwargs):
+        self.items.append(Item(**kwargs))
     
 # Это проверочный код, запустите файл, чтобы увидеть логику работы классов
 if __name__ == '__main__':

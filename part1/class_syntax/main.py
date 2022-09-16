@@ -16,24 +16,29 @@
 
 # Стартовый код
 
+from functools import reduce
+from operator import attrgetter
+
 
 class Item:
     def __init__(self, title, price):
-        pass
-        # TODO напишите Ваш код здесь
+        self.title = title
+        self.price = price
+
+    def __str__(self):
+        return f"{self.title} - {self.price}"
+
 
 class Cheque:
     def __init__(self):
-        pass
-        # TODO напишите Ваш код здесь
+        self.items = []
 
     def purchases(self):
-        pass
-        # TODO напишите Ваш код здес
+        return "\n".join([str(item) for item in self.items])
     
     def get_sum(self):
-        pass
-        # TODO напишите Ваш код здес
+        return f"Всего: {reduce(lambda total, item: total + item.price, self.items, 0)}"
+
 
 if __name__ == '__main__':
     # Создаём товары с ценой

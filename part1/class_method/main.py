@@ -44,17 +44,17 @@ class Storage:
 
     def __init__(self, qnt):
         # TODO напишите Ваш код здесь
-        # self.goods_quantity =                    # Оставим эту строчку для Вас в качестве подсказки
-        pass
+        total = Storage._get_total()
+        self.goods_quantity = qnt if qnt <= total else total
+        Storage._set_total(total - self.goods_quantity)
+
     @classmethod
     def _get_total(cls):
-        # TODO напишите Ваш код здесь
-        pass
+        return cls.goods_quantity
 
     @classmethod
     def _set_total(cls, qnt):
-        # TODO напишите Ваш код здесь
-        pass
+        cls.goods_quantity = qnt
 
 
 # Как закончите писать код, запустите его, 
