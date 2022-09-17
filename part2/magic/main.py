@@ -24,28 +24,28 @@ class Item:
         return price
 
     def __repr__(self):
-        pass
+        return f"{self.title}, {self.quantity} {self.unit}, {self.total_price()} руб."
 
-    def __eq__(self, other):
-        pass
+    def __eq__(self, other: "Unit"):
+        return self.total_price() == other.total_price()
 
     def __ne__(self, other):
-        pass
+        return self.total_price() != other.total_price()
 
     def __gt__(self, other):
-        pass
+        return self.total_price() > other.total_price()
 
     def __ge__(self, other):
-        pass
+        return self.total_price() >= other.total_price()
 
     def __lt__(self, other):
-        pass
+        return self.total_price() < other.total_price()
 
     def __le__(self, other):
-        pass
+        return self.total_price() <= other.total_price()
 
 
-# Здесь код для самопроверки, 
+# Здесь код для самопроверки,
 # если в терминале хотя бы один пункт ложь, тогда ищите ошибку в коде,
 # А если совсем запутались, запустите наши тесты и мы подскажем
 if __name__ == '__main__':
@@ -74,6 +74,7 @@ if __name__ == '__main__':
     
     
     print(fried_pythons)
+    print('Жареные питоны, 0.3 г., 150.0 руб.' == fried_pythons.__repr__())
     print(
         "Правда ли что сушеные и жареные питоны стоят одинаково?", 
         true_lie(dried_pythons == fried_pythons))

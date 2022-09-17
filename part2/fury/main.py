@@ -35,9 +35,15 @@ class Unit:
             raise UnitDied(f'Трагически погиб в неравном бою {self.name}')
         return True
 
+
 class FuriousHero(Unit):
-    pass
-    #TODO напишите логику класса здесь
+
+    def _get_damage(self, damage):
+        last_hp = self.hp
+        super(FuriousHero, self)._get_damage(damage)
+        if self.hp < last_hp:
+            self.power += 1
+
 
 # Логика кода ниже такая же, как и в предыдущем задании.
 # Если вдруг интересно, то можно

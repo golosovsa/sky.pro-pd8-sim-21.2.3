@@ -24,7 +24,7 @@ class Unit:
         self.defence = defence
         self.power = power
 
-    def hit(self, other):
+    def hit(self, other: "Unit"):
         damage = random.choice(range(1, self.power))
         other._get_damage(damage)
         return f"{self.name} ({self.hp}) наносит {damage} урона {other.name} ({other.hp})"
@@ -41,9 +41,16 @@ class Unit:
 
 
 class StoneGuard(Unit):
-    # TODO опишите новый класс здесь
-    pass
+    def __init__(self, name, hp, defence, power):
+        super(StoneGuard, self).__init__(name, hp, defence, power)
+        self.was_attacked = False
 
+    def _get_damage(self, damage):
+        if self.was_attacked:
+            super(StoneGuard, self)._get_damage(damage)
+            return
+        print(f"{self.name} блокирует урон")
+        self.was_attacked = True
 
 # Логика кода ниже такая же, как и в предыдущем задании.
 # Если вдруг интересно, то можно
